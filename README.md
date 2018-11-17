@@ -16,22 +16,23 @@ Insurance policies on various domains (agriculture/ health, holidays, cars and i
         String address;
         String phoneNumber;
         String email;
-        InsurancePolicy insurancePolicy;
         String observations;
+        // double budget; (?)
+        InsurancePolicy insurancePolicy;
     
-    InsurancePolicy:
+    InsurancePolicy: // abstract
         int id;
         String name;
         InsuranceType type; // enum type (Health, Travel, Auto, and Property)
         Date startDate;
         Date endDate;
         Customer customer;
+        ArrayList<Package> packages; // selected policy packages (/ categories ?)
     
     // https://www.healthcare.gov/choose-a-plan/plans-categories/
     PolicyHealth: // extends InsurancePolicy
         ArrayList<CustomerHealthPol> peopleCovered; // people covered by the insurance policy
         // https://www.bupa.com.au/staticfiles/BupaP3/pdfs/09638-standard-retail-app-form.pdf
-        ArrayList<Package> packages; // selected policy packages (/ categories ?)
         
     // https://www.techemergence.com/artificial-intelligence-in-health-insurance-current-applications-and-trends/
     CustomerHealthPol: // extends Customer
@@ -43,12 +44,10 @@ Insurance policies on various domains (agriculture/ health, holidays, cars and i
         ArrayList<Countries> destinations; // enum type
         ArrayList<Customer> peopleCovered; // people covered by the insurance policy
         boolean hasMedicalConditions; // if any person has any medical condition
-        ArrayList<Package> packages; // selected policy packages (/ categories ?)
         
     PolicyAuto: // extends InsurancePolicy
         // here, Customer object will be of type CustomerAutoPol
         CustomerVehicle vehicle;
-        ArrayList<Package> packages; // selected policy packages (/ categories ?)
     
     // https://www.policybazaar.com/motor-insurance/
     CustomerAutoPol: // extends Customer
@@ -77,5 +76,6 @@ Insurance policies on various domains (agriculture/ health, holidays, cars and i
         int id;
         String name;
         String description; // what the package offers
+        InsuranceType type; // see InsurancePolicy class for the enum type
         double price;
     
