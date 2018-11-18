@@ -69,8 +69,10 @@ Insurance policies on various domains (agriculture/ health, holidays, cars and i
         Customer owner;
         PolicyAuto policy;
         
+    /*
     PolicyProperty: // extends InsurancePolicy
         ...
+    */
     
     Package: // each package offer can have exclusions (RULES which allow the customer to choose it or not); check PolicyTravel link for examples
         int id;
