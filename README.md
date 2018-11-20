@@ -1,7 +1,5 @@
 # InsuranceApplication
-Insurance policies on various domains (agriculture/ health, holidays, 
-cars and individual property
-)
+Insurance policies on various domains (agriculture/ health, holidays, cars and individual property)
 
 # Notes
 1) Customer segmentation: Different customers tend to have specific expectations for the insurance business. Insurance marketing applies various techniques to increase the number of customers and to assure targeted marketing strategies. 
