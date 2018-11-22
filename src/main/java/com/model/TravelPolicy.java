@@ -6,5 +6,5 @@ import com.enums.Country;
 
 public class TravelPolicy extends InsurancePolicy{
 	private List<Country> destinations;
-	private List<TravelData> beneficiary;
+	private List<TravelData> beneficiaries;
 }

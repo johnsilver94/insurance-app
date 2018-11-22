@@ -8,6 +8,5 @@ public abstract class InsurancePolicy {
     private Enum type;
     private Date starDate;
     private Date endDate;
-    private Boolean selfInclude;
     private InsurancePlan plan;
 }

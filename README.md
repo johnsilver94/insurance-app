@@ -26,7 +26,6 @@ Insurance policies on various domains (agriculture/ health, holidays, cars and i
         Enum type;
         Date starDate;
         Date endDate;
-        Boolean selfInclude;
         InsurancePlan plan; // selected plan by customer
 
     HealthPolicy: // extends InsurancePolicy
@@ -39,7 +38,7 @@ Insurance policies on various domains (agriculture/ health, holidays, cars and i
 
     TravelPolicy: // extends InsurancePolicy
         List<Country> destinations;
-        List<TravelData> beneficiary;
+        List<TravelData> beneficiaries;
 
     HealthData:
         Customer customer
