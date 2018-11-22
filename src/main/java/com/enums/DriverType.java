@@ -1,13 +1,19 @@
 package com.enums;
 
-public class DriverType {
-	public static final String TaxiDriver = "Taxicab driver";
-	public static final String UberDriver = "Uber Driver";
-	public static final String Chauffeur = "Chauffeur";
-	public static final String PayDriver = "Pay driver";
-	public static final String TestDriver = "Test driver";
-	public static final String Delivery = "Delivery (commerce)";
-	public static final String BusDriver = "Bus driver";
-	public static final String TruckDriver = "Truck driver";
-	public static final String Motorman = "Motorman";
+public enum DriverType {
+	TAXIDRIVER("Taxicab driver"),
+	UBERDRIVER("Uber Driver"),
+	CHAUFFEUR("Chauffeur"),
+	PAYDRIVER("Pay driver"),
+	TESTDRIVER("Test driver"),
+	DELIVERY("Delivery (commerce)"),
+	BUSDRIVER("Bus driver"),
+	TRUCKDRIVER("Truck driver"),
+	MOTORMAN("Motorman");
+	
+	private final String type;
+	
+	DriverType(String type) {
+        this.type = type;
+    }
 }

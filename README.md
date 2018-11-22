@@ -58,7 +58,7 @@ Insurance policies on various domains (agriculture/ health, holidays, cars and i
     TravelData:
         Integer id;
         Customer customer;
-        TouristType touristType;
+        Purpose Purpose;
         Enum healtcareNeeds;
 
     Vehicle:
@@ -79,3 +79,5 @@ Insurance policies on various domains (agriculture/ health, holidays, cars and i
         String description; // what the package offers
         InsuranceType type; // see InsurancePolicy class for the enum type
         double price;
+        List<Coverage> coverages;
+        List<Benefit> benefits;

@@ -1,10 +1,10 @@
 package com.model;
 
-import com.enums.TouristType;
+import com.enums.Purpose;
 
 public class TravelData {
 	private Integer id;
 	private Customer customer;
-	private TouristType touristType;
+	private Purpose pourpose;
     private Enum healtcareNeeds;
 }
