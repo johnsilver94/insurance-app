@@ -99,4 +99,3 @@ Insurance policies on various domains (agriculture/ health, holidays, cars and i
         String description;
         Double amount;
 
-# Enums:
