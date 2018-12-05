@@ -11,19 +11,19 @@ Insurance policies on various domains (agriculture/ health, holidays, cars and i
 # Entities:
 
     Customer:
-        int id;
+        Integer id;
         String name;
         Date birthday;
-        Enum gender;
+        Enum gender; //Enum(Male,Female)
         String address;
-        String phoneNumber;
+        String phonenumber;
         String email;
         String observations;
-        List<InsurancePolicy> customerPolicy
+        List<InsurancePolicy> customerPolicies;
 
     InsurancePolicy: // abstract
         Integer id;
-        Enum type;
+        Enum type; //Enum(Health,Auto,Travel)
         Date starDate;
         Date endDate;
         InsurancePlan plan; // selected plan by customer
@@ -42,7 +42,7 @@ Insurance policies on various domains (agriculture/ health, holidays, cars and i
 
     HealthData:
         Customer customer
-        Enum healtcareNeeds;
+        Enum healtcareNeeds; //Enum(Low use,Medium use,High use)
         Boolean isSmoker;
         List<Disease> diseases;
         List<Medication> medications;
@@ -51,22 +51,21 @@ Insurance policies on various domains (agriculture/ health, holidays, cars and i
         Integer id;
         Customer customer;
         DriverCategory driverCategory;
-        int drivingExpYears; // years of driving experience
-        int accidentsInvolved; // number of accidents the person was involved in (he was at fault)
-        DriverType driverType;; // enum type (Taxi, PublicTransport, Delivery, ProductTransport, ProfessionalDriver, and Other)
+        Integer drivingExpYears; // years of driving experience
+        Integer accidentsInvolved; // number of accidents the person was involved in (he was at fault)
+        DriverType driverType;; // Enum(Taxi, PublicTransport, Delivery, ProductTransport, ProfessionalDriver, and Other)
 
-    TravelData:
+    TravelData: // ! need HealthData
         Integer id;
         Customer customer;
-        Purpose Purpose;
-        Enum healtcareNeeds;
+        Enum pourpose; //Enum(Business,Sport,Rest)
 
     Vehicle:
         Integer id;
         String manufacturer;
         Integer year;
         String model;
-        VehicleType type; // enum type (Sedan, Coupe, Hatchback, Convertible, SUV, Motorcycle)
+        VehicleType type; // Enum(Sedan, Coupe, Hatchback, Convertible, SUV, Motorcycle)
         Double value; // car value, at the moment (?)
         String observations;
         Boolean inLeasing;
@@ -77,7 +76,27 @@ Insurance policies on various domains (agriculture/ health, holidays, cars and i
         int id;
         String name;
         String description; // what the package offers
-        InsuranceType type; // see InsurancePolicy class for the enum type
         double price;
         List<Coverage> coverages;
         List<Benefit> benefits;
+
+    Disease:
+        Integer id;
+        String name;
+
+    Coverage:
+        Integer id;
+        String name;
+        String description;
+
+    Country:
+        Integer id;
+        String code;
+        String name;
+
+    Benefit:
+        Integer id;
+        String description;
+        Double amount;
+
+# Enums:

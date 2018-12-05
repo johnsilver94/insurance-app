@@ -1,6 +1,7 @@
 package com.model;
 
 import java.util.Date;
+import java.util.List;
 
 public class Customer {
 	private Integer id;
@@ -11,6 +12,6 @@ public class Customer {
 	private String phonenumber;
 	private String email;
 	private String observations;
-	private InsurancePolicy customerPolicy; 
+	private List<InsurancePolicy> customerPolicies; 
 	
 }
