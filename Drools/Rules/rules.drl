@@ -1,0 +1,16 @@
+//created on: Nov 1, 2018
+package Rules
+
+//list any import classes here.
+import com.model.*;
+import com.enums.*;
+
+
+//declare any global variables here
+rule "test" salience 4
+when
+	ad:AutoData(driverCategory == DriverCategory.B1)
+then
+	ad.setDrivingExperience(100);
+	System.out.println("Modification created.");
+end
