@@ -99,3 +99,5 @@ Insurance policies on various domains (agriculture/ health, holidays, cars and i
         String description;
         Double amount;
 
+# BD Schema
+![Schema](/_source/schema.jpg)
