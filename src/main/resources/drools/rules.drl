@@ -11,6 +11,6 @@ rule "test" salience 4
    when
    	ad:AutoData(driverCategory == DriverCategory.B1)
    then
-   	ad.setDrivingExperience(50);
+   	ad.setDrivingExperience(40);
    	System.out.println("Modification created.");
    end

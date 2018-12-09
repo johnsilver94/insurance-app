@@ -1,5 +1,3 @@
-package com.test;
-
 
 
 import com.enums.Gender;
