@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+	<persistence-unit name="InsuranceApplication">
+		<class>com.model.AutoData</class>
+		<class>com.model.AutoPolicy</class>
+		<class>com.model.Benefit</class>
+		<class>com.model.Country</class>
+		<class>com.model.Coverage</class>
+		<class>com.model.Customer</class>
+		<class>com.model.Disease</class>
+		<class>com.model.HealthData</class>
+		<class>com.model.HealthPolicy</class>
+		<class>com.model.InsurancePlan</class>
+		<class>com.model.InsurancePolicy</class>
+		<class>com.model.Medication</class>
+		<class>com.model.TravelData</class>
+		<class>com.model.TravelPolicy</class>
+		<class>com.model.Vehicle</class>
+	</persistence-unit>
+</persistence>
