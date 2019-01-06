@@ -1,15 +1,7 @@
 package com.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-import javax.persistence.Id;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Column;
-import javax.persistence.OneToOne;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.Enumerated;
-import javax.persistence.EnumType;
+import javax.persistence.*;
+import javax.xml.bind.annotation.*;
 
 import com.enums.DriverCategory;
 import com.enums.DriverType;
@@ -18,73 +10,87 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import java.math.BigInteger;
 
+@XmlAccessorType(XmlAccessType.NONE)
+@XmlRootElement
 @Entity
 @Table(name = "AutoData")
 public class AutoData {
 	@Id
 	@GeneratedValue
-	@Column(name = "autoId", unique = true,nullable = false)
+	@Column(name = "healthId",unique = true,nullable = false)
 	private BigInteger id;
-	@LazyCollection(LazyCollectionOption.FALSE)
-	@OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customerId")
+	@MapsId
+    @OneToOne(fetch = FetchType.LAZY)
 	private Customer customer;
-	// in years
-	private Integer drivingExperience;
-	private Integer accidentInvolved;
+	private String licenseid;
+	private Integer exprience;
+	private Integer accidents;
 	@Enumerated(EnumType.STRING)
-	private DriverCategory driverCategory;
+	private DriverCategory category;
 	@Enumerated(EnumType.STRING)
-	private DriverType driverType;
+	private DriverType type;
 
+	//Getters
+//	@XmlAttribute
 	public Customer getCustomer() {
 		return customer;
 	}
+	@XmlAttribute
+	public String getLicenseId() {
+		return licenseid;
+	}
+	@XmlAttribute
+	public Integer getExprience() {
+		return exprience;
+	}
+	@XmlAttribute
+	public Integer getAccidents() {
+		return accidents;
+	}
+	@XmlAttribute
+	public DriverCategory getCategory() {
+		return category;
+	}
+	@XmlAttribute
+	public DriverType getType() {
+		return type;
+	}
 
+	//Setters
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 
-	public Integer getDrivingExperience() {
-		return drivingExperience;
+	public void setLicenseId(String licenseid) {
+		this.licenseid = licenseid;
 	}
 
-	public void setDrivingExperience(Integer drivingExperience) {
-		this.drivingExperience = drivingExperience;
+	public void setExprience(Integer exprience) {
+		this.exprience = exprience;
 	}
 
-	public Integer getAccidentInvolved() {
-		return accidentInvolved;
+	public void setAccidents(Integer accidents) {
+		this.accidents = accidents;
 	}
 
-	public void setAccidentInvolved(Integer accidentInvolved) {
-		this.accidentInvolved = accidentInvolved;
+	public void setCategory(DriverCategory category) {
+		this.category = category;
 	}
 
-	public DriverCategory getDriverCategory() {
-		return driverCategory;
-	}
-
-	public void setDriverCategory(DriverCategory driverCategory) {
-		this.driverCategory = driverCategory;
-	}
-
-	public DriverType getDriverType() {
-		return driverType;
-	}
-
-	public void setDriverType(DriverType driverType) {
-		this.driverType = driverType;
-	}
-
-	public AutoData(Customer customer, Integer drivingExperience, Integer accidentInvolved, DriverCategory driverCategory) {
-		this.customer = customer;
-		this.drivingExperience = drivingExperience;
-		this.accidentInvolved = accidentInvolved;
-		this.driverCategory = driverCategory;
+	public void setType(DriverType type) {
+		this.type = type;
 	}
 
 	public AutoData() {
 		super();
+	}
+
+	public AutoData(Customer customer, String licenseid, Integer exprience, Integer accidents, DriverCategory category, DriverType type) {
+		this.customer = customer;
+		this.licenseid = licenseid;
+		this.exprience = exprience;
+		this.accidents = accidents;
+		this.category = category;
+		this.type = type;
 	}
 }

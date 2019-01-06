@@ -9,8 +9,16 @@ import com.enums.*;
 //declare any global variables here
 rule "test" salience 4
    when
-   	ad:AutoData(driverCategory == DriverCategory.B1)
+   	ad:AutoData(category == DriverCategory.B1)
    then
-   	ad.setDrivingExperience(40);
+   	ad.setExprience(40);
    	System.out.println("Modification created.");
    end
+
+rule "test2" salience 3
+    when
+        c:Customer(email == null)
+    then
+        c.setBeneficiary(true);
+        System.out.println("Customer modified through services");
+    end

@@ -8,20 +8,25 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlRootElement;
 
+@XmlRootElement
 @Entity
 @Table(name = "HealthData")
 public class HealthData {
     @Id
     @GeneratedValue
-    @Column(name = "healthId",unique = true,nullable = false)
+    @Column(name = "id",unique = true,nullable = false)
     private BigInteger id;
+    @MapsId
     @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "customerId")
 	private Customer customer;
+    private String healthId;
     @Enumerated(EnumType.STRING)
     private HealthCareNeeds healtcareNeeds;
-    private Boolean isSmoker;
+    private Boolean smoker;
+    
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany
     @JoinTable(name = "HealtData_Disease",joinColumns = @JoinColumn(name = "healthId"),inverseJoinColumns = @JoinColumn(name = "diseaseId"))
@@ -31,62 +36,75 @@ public class HealthData {
     @JoinTable(name = "HealthData_Medication",joinColumns = @JoinColumn(name = "healthId"),inverseJoinColumns = @JoinColumn(name = "medicationId"))
     private List<Medication> medications;
 
-    public HealthData() {
-        super();
-    }
-
+    //Getters
+    @XmlAttribute
     public BigInteger getId() {
         return id;
     }
+    @XmlAttribute
+    public Customer getCustomer() {
+        return customer;
+    }
+    @XmlAttribute
+    public String getHealthId() {
+        return healthId;
+    }
+    @XmlAttribute
+    public HealthCareNeeds getHealtcareNeeds() {
+        return healtcareNeeds;
+    }
+    @XmlAttribute
+    public Boolean getSmoker() {
+        return smoker;
+    }
+    @XmlAttribute
+    public List<Disease> getDiseases() {
+        return diseases;
+    }
+    @XmlAttribute
+    public List<Medication> getMedications() {
+        return medications;
+    }
+
+    //Setters
 
     public void setId(BigInteger id) {
         this.id = id;
-    }
-
-    public Customer getCustomer() {
-        return customer;
     }
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
-    public HealthCareNeeds getHealtcareNeeds() {
-        return healtcareNeeds;
+    public void setHealthId(String healthId) {
+        this.healthId = healthId;
     }
 
     public void setHealtcareNeeds(HealthCareNeeds healtcareNeeds) {
         this.healtcareNeeds = healtcareNeeds;
     }
 
-    public Boolean getSmoker() {
-        return isSmoker;
-    }
-
     public void setSmoker(Boolean smoker) {
-        isSmoker = smoker;
-    }
-
-    public List<Disease> getDiseases() {
-        return diseases;
+        this.smoker = smoker;
     }
 
     public void setDiseases(List<Disease> diseases) {
         this.diseases = diseases;
     }
 
-    public List<Medication> getMedications() {
-        return medications;
-    }
-
     public void setMedications(List<Medication> medications) {
         this.medications = medications;
     }
 
-    public HealthData(Customer customer, HealthCareNeeds healtcareNeeds, Boolean isSmoker, List<Disease> diseases, List<Medication> medications) {
+    public HealthData() {
+        super();
+    }
+
+    public HealthData(Customer customer, String healthId, HealthCareNeeds healtcareNeeds, Boolean smoker, List<Disease> diseases, List<Medication> medications) {
         this.customer = customer;
+        this.healthId = healthId;
         this.healtcareNeeds = healtcareNeeds;
-        this.isSmoker = isSmoker;
+        this.smoker = smoker;
         this.diseases = diseases;
         this.medications = medications;
     }

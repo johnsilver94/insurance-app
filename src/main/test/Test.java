@@ -4,18 +4,17 @@ import com.enums.Gender;
 import com.model.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.kie.api.KieServices;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
-
 import com.enums.DriverCategory;
 import com.enums.DriverType;
-
+import javax.persistence.Query;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class Test {
 	public static void main(String[] args) {
@@ -24,73 +23,76 @@ public class Test {
 		KieSession kieSession=kContainer.newKieSession("ksession-rules");
 
 		Customer customer = new Customer();
-		customer.setName("Test");
+		Profile profile = new Profile();
+		customer.setEmail("example1@mail.com");
+		customer.setUsername("test5");
+		customer.setPassword("pass");
+		customer.setObservations("Observations");
+		customer.setAutodata(null);
+		customer.setProfile(null);
+		customer.setHealthdata(null);
+		customer.setTraveldata(null);
+		customer.setPolicies(null);
 
 
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-		String dateString = format.format( new Date()   );
 		Date   date       = null;
 		try {
 			date = format.parse ( "1996-12-31");
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		customer.setBirthday(date);
-		customer.setGender(Gender.MALE);
-		customer.setAddress("Iasi");
-		customer.setPhonenumber("075 6323 5654");
-		customer.setEmail("example@mail.com");
-		customer.setObservations("Observations");
-		customer.setHealthData(null);
-		customer.setTravelData(null);
-		customer.setAutoData(null);
-		customer.setCustomerPolicies(null);
+
+		profile.setName("Name");
+		profile.setSurname("Surname");
+		profile.setBirthday(date);
+		profile.setGender(Gender.MALE);
+		profile.setAddress("Iasi");
+		profile.setPhonenumber("075 6323 5654");
+		profile.setSsc("2132141343542343");
+		profile.setWork("No work");
+
+//		customer.setProfile(profile);
 
 		AutoData autoData = new AutoData();
-		autoData.setAccidentInvolved(5);
-		autoData.setDrivingExperience(5);
-		autoData.setDriverCategory(DriverCategory.B1);
-		autoData.setDriverType(DriverType.TAXIDRIVER);
-//		autoData.setCustomer(customer);
+		autoData.setLicenseId("as8809723423423");
+		autoData.setAccidents(5);
+		autoData.setExprience(5);
+		autoData.setCategory(DriverCategory.B1);
+		autoData.setType(DriverType.TAXIDRIVER);
+//
+//		customer.setAutodata(autoData);
 
-		customer.setAutoData(autoData);
 		kieSession.insert(autoData);
 		kieSession.fireAllRules();
 		
 
 
-		Configuration con =  new Configuration()
-				.addPackage("com.model")
-				.addAnnotatedClass(AutoData.class)
-				.addAnnotatedClass(AutoPolicy.class)
-				.addAnnotatedClass(Benefit.class)
-				.addAnnotatedClass(Country.class)
-				.addAnnotatedClass(Coverage.class)
-				.addAnnotatedClass(Customer.class)
-				.addAnnotatedClass(Disease.class)
-				.addAnnotatedClass(HealthData.class)
-				.addAnnotatedClass(HealthPolicy.class)
-				.addAnnotatedClass(InsurancePlan.class)
-				.addAnnotatedClass(InsurancePolicy.class)
-				.addAnnotatedClass(Medication.class)
-				.addAnnotatedClass(TravelData.class)
-				.addAnnotatedClass(TravelPolicy.class)
-				.addAnnotatedClass(Vehicle.class)
-				.configure();
-
-		
+		Configuration con =  new Configuration().configure();
 		SessionFactory sf = con.buildSessionFactory();
-		
-		Session session = sf.openSession();		
-		
-		Transaction transaction = session.beginTransaction();
+		Session session = sf.openSession();
 
-		session.save(customer);
+		if(!session.beginTransaction().isActive()) {
+            session.beginTransaction().begin();
+        }
+
+        session.save(customer);
 		autoData.setCustomer(customer);
-		session.save(autoData);
-		
-		transaction.commit();
+		profile.setCustomer(customer);
+
+		customer.setAutodata(autoData);
+		customer.setProfile(profile);
+		session.update(customer);
+
+		session.getTransaction().commit();
+        Query query = session.createQuery("SELECT c FROM Customer c");
+
+        List<Customer> customers = query.getResultList();
+
+        System.out.println(""+customers.size());
 		session.close();
+
+
 	}
 
 }
