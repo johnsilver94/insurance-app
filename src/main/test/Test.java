@@ -24,8 +24,8 @@ public class Test {
 
 		Customer customer = new Customer();
 		Profile profile = new Profile();
-		customer.setEmail("example1@mail.com");
-		customer.setUsername("test5");
+		customer.setEmail("example2@mail.com");
+		customer.setUsername("test4");
 		customer.setPassword("pass");
 		customer.setObservations("Observations");
 		customer.setAutodata(null);
@@ -87,7 +87,7 @@ public class Test {
 		session.getTransaction().commit();
         Query query = session.createQuery("SELECT c FROM Customer c");
 
-        List<Customer> customers = query.getResultList();
+        List customers = query.getResultList();
 
         System.out.println(""+customers.size());
 		session.close();

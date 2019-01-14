@@ -1,8 +1,0 @@
-<component name="ArtifactManager">
-  <artifact type="war" name="insurance-application">
-    <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="insurance-application.war">
-      <element id="artifact" artifact-name="InsuranceApplication:Web exploded" />
-    </root>
-  </artifact>
-</component>
