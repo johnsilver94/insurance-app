@@ -5,20 +5,219 @@ package Rules
 import com.model.*;
 import com.enums.*;
 
+//list of functional classes import
+import java.util.Calendar;
+import java.util.Locale;
+import static java.util.Calendar.*;
+import java.util.Date;
+
+//Functions
+function double calculateSquare (double value) {
+   return value * value;
+}
+
+function int getDiffYears(Date first, Date last) {
+    Calendar a = Calendar.getInstance(Locale.US);
+    Calendar b = Calendar.getInstance(Locale.US);
+    a.setTime(first);
+    b.setTime(last);
+
+    int diff = b.get(Calendar.YEAR) - a.get(Calendar.YEAR);
+    if (a.get(Calendar.MONTH) > b.get(Calendar.MONTH) ||
+        (a.get(Calendar.MONTH) == b.get(Calendar.MONTH) && a.get(Calendar.DATE) > b.get(Calendar.DATE))) {
+        diff--;
+    }
+    return diff;
+}
+function boolean licenseChecker(DriverCategory category)
+{
+    boolean ret = false;
+    switch (category) {
+                case B1:  ret = true;
+                         break;
+                case AM:  ret = true;
+                         break;
+                case A1:  ret = true;
+                         break;
+                default:  ret = false;
+                         break;
+            }
+    return ret;
+}
+function double accidentsScore(int accidents,int experience)
+{
+    double ret = 0.0;
+    ret = accidents/experience;
+
+    return ret;
+}
 
 //declare any global variables here
-rule "test" salience 4
-   when
-   	ad:AutoData(category == DriverCategory.B1)
-   then
-   	ad.setExprience(50);
-   	System.out.println("Modification created.");
-   end
+//rule "test" salience 4
+//   when
+//   	ad:AutoData(category == DriverCategory.B1)
+//   then
+//   	ad.setExprience(50);
+//   	System.out.println("Modification created.");
+//   end
 
-rule "test2" salience 3
+//Rules
+rule "Set Beneficiary"
     when
-        c:Customer(email == null)
+        c:Customer(username = null)
     then
         c.setBeneficiary(true);
-        System.out.println("Customer modified through services");
-    end
+        System.out.println("Customer is transformed into beneficiary");
+ end
+
+rule "Default gender"
+    when
+        p:Profile(gender = null)
+    then
+        p.setGender(Gender.MALE);
+end
+
+rule "Set male gender from ssc <2000"
+   when
+      p:Profile(ssc matches "^1+")
+   then
+      p.setGender(Gender.MALE);
+end
+
+rule "Set male gender from ssc <2100"
+   when
+      p:Profile(ssc matches "^5+")
+   then
+      p.setGender(Gender.MALE);
+end
+
+rule "Set female gender from ssc <2000"
+   when
+      p:Profile(ssc matches "^2+")
+   then
+      p.setGender(Gender.MALE);
+end
+
+rule "Set female gender from ssc <2100"
+   when
+      p:Profile(ssc matches "^6+")
+   then
+      p.setGender(Gender.MALE);
+end
+
+rule "Set birthday from ssc"
+   when
+      p:Profile(ssc matches "^6+")
+   then
+      p.setGender(Gender.MALE);
+end
+
+rule "Age from birthday" salience 10
+    when
+        p:Profile(birthday != null)
+    then
+        Date curent = new Date();
+        p.setAge(getDiffYears(getBirthday(),curent));
+ end
+
+rule "Country[Romania] from phonenumber"
+    when
+        p:Profile(phonenumber matches "^0040+")
+    then
+        p.setCountry("Romania");
+ end
+
+rule "Country[R.Moldova] from phonenumber"
+     when
+         p:Profile(phonenumber matches "^00373+")
+     then
+        p.setCountry("R.Moldova");
+  end
+
+rule "License cancellation"
+     when
+         p:Profile(age < 16)
+     then
+        p.getCustomer().getAutodata().setLicenseId(null);
+        p.getCustomer().getAutodata().setExprience(0);
+        p.getCustomer().getAutodata().setAccidents(0);
+  end
+
+rule "Wrong license"
+    when
+        p:Profile((age <18 && age>=16) && licenseChecker(customer.autodata.category))
+    then
+        p.getCustomer().getAutodata().setLicenseId(null);
+        p.getCustomer().getAutodata().setExprience(0);
+        p.getCustomer().getAutodata().setAccidents(0);
+ end
+
+rule "Experience category[<5 years]"
+    when
+        ad:AutoData(exprience <5)
+    then
+        ad.setExperienceLevel(ExperienceLevel.NEWBIE);
+ end
+
+rule "Experience category[between 5 and 15 years]"
+    when
+        ad:AutoData(exprience > 5 && exprience < 15)
+    then
+        ad.setExperienceLevel(ExperienceLevel.INTERMEDIATE);
+ end
+
+rule "Experience category[>15 years]"
+    when
+        ad:AutoData(exprience > 15)
+    then
+        ad.setExperienceLevel(ExperienceLevel.EXPERT);
+ end
+
+rule "Accident level[Low]"
+    when
+        ad:AutoData(accidentsScore(accidents,exprience) <= 0.5)
+    then
+        ad.setAccidentsLevel(AccidentsLevel.LOW);
+ end
+
+rule "Accident level[Medium]"
+    when
+        ad:AutoData(accidentsScore(accidents,exprience) > 0.5 && accidentsScore(accidents,exprience) <1)
+    then
+        ad.setAccidentsLevel(AccidentsLevel.MEDIUM);
+ end
+
+rule "Accident level[High]"
+    when
+        ad:AutoData(accidentsScore(accidents,exprience) > 1 && accidentsScore(accidents,exprience) <1.5)
+    then
+        ad.setAccidentsLevel(AccidentsLevel.HIGH);
+ end
+
+rule "Accident level[VeryHigh]"
+    when
+        ad:AutoData(accidentsScore(accidents,exprience) > 1.5 && accidentsScore(accidents,exprience) <2)
+    then
+        ad.setAccidentsLevel(AccidentsLevel.VERYHIGH);
+ end
+
+rule "Health care needs[High]"
+    when
+        h:HealthData(customer.profile.age >70)
+    then
+        h.setHealthcareNeeds(HealthCareNeeds.HIGH);
+ end
+
+rule "Health care needs[High]"
+     when
+         h:HealthData(customer.profile.age >60 && smoker = true)
+     then
+         h.setHealthcareNeeds(HealthCareNeeds.HIGH);
+  end
+
+rule "Purpose default"
+    when
+        t:TravelData(pourpose = "")
+    then
+        t.setPourpose(Purpose.REST);
+ end

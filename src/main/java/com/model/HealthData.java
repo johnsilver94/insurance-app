@@ -24,7 +24,7 @@ public class HealthData {
 	private Customer customer;
     private String healthId;
     @Enumerated(EnumType.STRING)
-    private HealthCareNeeds healtcareNeeds;
+    private HealthCareNeeds healthcareNeeds;
     private Boolean smoker;
     
     @LazyCollection(LazyCollectionOption.FALSE)
@@ -50,8 +50,8 @@ public class HealthData {
         return healthId;
     }
     @XmlAttribute
-    public HealthCareNeeds getHealtcareNeeds() {
-        return healtcareNeeds;
+    public HealthCareNeeds getHealthcareNeeds() {
+        return healthcareNeeds;
     }
     @XmlAttribute
     public Boolean getSmoker() {
@@ -80,8 +80,8 @@ public class HealthData {
         this.healthId = healthId;
     }
 
-    public void setHealtcareNeeds(HealthCareNeeds healtcareNeeds) {
-        this.healtcareNeeds = healtcareNeeds;
+    public void setHealthcareNeeds(HealthCareNeeds healtcareNeeds) {
+        this.healthcareNeeds = healtcareNeeds;
     }
 
     public void setSmoker(Boolean smoker) {
@@ -100,10 +100,10 @@ public class HealthData {
         super();
     }
 
-    public HealthData(Customer customer, String healthId, HealthCareNeeds healtcareNeeds, Boolean smoker, List<Disease> diseases, List<Medication> medications) {
+    public HealthData(Customer customer, String healthId, HealthCareNeeds healthcareNeeds, Boolean smoker, List<Disease> diseases, List<Medication> medications) {
         this.customer = customer;
         this.healthId = healthId;
-        this.healtcareNeeds = healtcareNeeds;
+        this.healthcareNeeds = healthcareNeeds;
         this.smoker = smoker;
         this.diseases = diseases;
         this.medications = medications;
