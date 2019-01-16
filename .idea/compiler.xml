@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="insurance-app" />
+        <module name="InsuranceApplication" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="insurance-app" target="1.5" />
+      <module name="insurance-app" target="1.8" />
+      <module name="InsuranceApplication" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

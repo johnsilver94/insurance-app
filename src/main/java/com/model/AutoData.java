@@ -3,10 +3,8 @@ package com.model;
 import javax.persistence.*;
 import javax.xml.bind.annotation.*;
 
-import com.enums.AccidentsLevel;
 import com.enums.DriverCategory;
 import com.enums.DriverType;
-import com.enums.ExperienceLevel;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -31,10 +29,6 @@ public class AutoData {
 	private DriverCategory category;
 	@Enumerated(EnumType.STRING)
 	private DriverType type;
-	@Enumerated(EnumType.STRING)
-	private ExperienceLevel experienceLevel;
-	@Enumerated(EnumType.STRING)
-	private AccidentsLevel accidentsLevel;
 
 	//Getters
 //	@XmlAttribute
@@ -61,14 +55,6 @@ public class AutoData {
 	public DriverType getType() {
 		return type;
 	}
-	@XmlAttribute
-	public ExperienceLevel getExperienceLevel() {
-		return experienceLevel;
-	}
-	@XmlAttribute
-	public AccidentsLevel getAccidentsLevel() {
-		return accidentsLevel;
-	}
 
 	//Setters
 	public void setCustomer(Customer customer) {
@@ -93,14 +79,6 @@ public class AutoData {
 
 	public void setType(DriverType type) {
 		this.type = type;
-	}
-
-	public void setExperienceLevel(ExperienceLevel experienceLevel) {
-		this.experienceLevel = experienceLevel;
-	}
-
-	public void setAccidentsLevel(AccidentsLevel accidentsLevel) {
-		this.accidentsLevel = accidentsLevel;
 	}
 
 	public AutoData() {

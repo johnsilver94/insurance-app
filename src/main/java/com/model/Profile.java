@@ -29,11 +29,9 @@ public class Profile {
     @Enumerated(EnumType.STRING)
     private Gender gender;
     private String phonenumber;
-    private Integer age;
     private String ssc; //Social Security Number
     private String address;
     private String work;
-    private String country;
 
     //Getters
 //    @XmlAttribute
@@ -72,14 +70,6 @@ public class Profile {
     public String getWork() {
         return work;
     }
-    @XmlAttribute
-    public Integer getAge() {
-        return age;
-    }
-    @XmlAttribute
-    public String getCountry() {
-        return country;
-    }
 
     //Setters
     public void setCustomer(Customer customer) {
@@ -116,14 +106,6 @@ public class Profile {
 
     public void setWork(String work) {
         this.work = work;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public void setCountry(String country) {
-        this.country = country;
     }
 
     public Profile() {
