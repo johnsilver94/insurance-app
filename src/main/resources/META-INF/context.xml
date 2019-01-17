@@ -1,0 +1,8 @@
+<Context>
+	
+	<ResourceLink name="jdbc/InsuranceDB"
+	              global="jdbc/InsuranceDB"
+	              type="javax.sql.DataSource"
+	/>
+
+</Context>

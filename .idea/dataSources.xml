@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="5428940c-6e38-4f7c-85f9-10c54fbd2313">
+    <data-source source="LOCAL" name="InsuranceApplication/Hibernate" uuid="7f7effc3-5adc-4cdd-9128-86c6b3d82731">
       <driver-ref>oracle</driver-ref>
       <synchronize>true</synchronize>
       <imported>true</imported>
       <remarks>Hibernate
 
-D:/Desktop/EclipseWorkspace/insurance-app/src/main/resources/hibernate.cfg.xml</remarks>
+D:/Desktop/EclipseWorkspace/insurance-app_master/src/main/resources/META-INF/persistence.xml</remarks>
+      <auto-commit>false</auto-commit>
+      <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
+      <jdbc-url>jdbc:oracle:thin:@localhost:1521:orcl</jdbc-url>
+      <driver-properties>
+        <property name="v$session.program" value="DataGrip" />
+      </driver-properties>
+    </data-source>
+    <data-source source="LOCAL" name="hibernate.cfg.xml/Hibernate" uuid="bc657287-abb0-4015-91ff-8db107fb5375">
+      <driver-ref>oracle</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>Hibernate
+
+D:/Desktop/EclipseWorkspace/insurance-app_master/src/main/resources/hibernate.cfg.xml</remarks>
       <auto-commit>false</auto-commit>
       <jdbc-driver>oracle.jdbc.OracleDriver</jdbc-driver>
       <jdbc-url>jdbc:oracle:thin:@localhost:1521:orcl</jdbc-url>

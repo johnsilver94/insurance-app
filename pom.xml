@@ -37,9 +37,42 @@
       <groupId>org.hibernate</groupId>
       <artifactId>hibernate-core</artifactId>
       <version>5.3.7.Final</version>
+      <exclusions>
+          <exclusion>
+              <artifactId>jta</artifactId>
+              <groupId>javax.transaction</groupId>
+          </exclusion>
+          <!-- Exclude SLF4j to avoid version conflicts (we have 1.6.6, this drags
+				  in 1.6.1) -->
+          <exclusion>
+              <groupId>org.slf4j</groupId>
+              <artifactId>slf4j-api</artifactId>
+          </exclusion>
+          <!-- Exclude dom4j to avoid version conflicts (we have 1.6, this drags
+				  in 1.6.1) -->
+          <exclusion>
+              <groupId>dom4j</groupId>
+              <artifactId>dom4j</artifactId>
+          </exclusion>
+      </exclusions>
+  </dependency>
+      <!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-c3p0 -->
+      <dependency>
+          <groupId>org.hibernate</groupId>
+          <artifactId>hibernate-c3p0</artifactId>
+          <version>5.3.7.Final</version>
+      </dependency>
+    
+    
+      <!-- https://mvnrepository.com/artifact/dom4j/dom4j -->
+  <dependency>
+      <groupId>dom4j</groupId>
+      <artifactId>dom4j</artifactId>
+      <version>1.6.1</version>
   </dependency>
     
-  <!-- https://mvnrepository.com/artifact/javax/javaee-web-api -->
+    
+      <!-- https://mvnrepository.com/artifact/javax/javaee-web-api -->
   <dependency>
       <groupId>javax</groupId>
       <artifactId>javaee-web-api</artifactId>
@@ -77,5 +110,27 @@
   </dependencies>
   <build>
     <finalName>insurance-app</finalName>
-  </build>
+          <plugins>
+              <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-compiler-plugin</artifactId>
+                  <version>3.8.0</version>
+                  <configuration>
+                      <source>${java.version}</source>
+                      <target>${java.version}</target>
+                  </configuration>
+              </plugin>
+              <!-- wildfly-maven-plugin -->
+              <plugin>
+                  <groupId>org.wildfly.plugins</groupId>
+                  <artifactId>wildfly-maven-plugin</artifactId>
+                  <version>2.0.0.Final</version>
+                  <configuration>
+                      <server-args>
+                          <server-arg>-Djboss.http.port=9090</server-arg>
+                      </server-args>
+                  </configuration>
+              </plugin>
+          </plugins>
+      </build>
 </project>

@@ -19,7 +19,7 @@ import java.math.BigInteger;
 public class AutoData {
 	@Id
 	@GeneratedValue
-	@Column(name = "healthId",unique = true,nullable = false)
+//	@Column(name = "healthId",unique = true,nullable = false)
 	private BigInteger id;
 	@MapsId
     @OneToOne(fetch = FetchType.LAZY)

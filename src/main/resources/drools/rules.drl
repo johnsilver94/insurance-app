@@ -52,172 +52,194 @@ function double accidentsScore(int accidents,int experience)
     return ret;
 }
 
-//declare any global variables here
-//rule "test" salience 4
-//   when
-//   	ad:AutoData(category == DriverCategory.B1)
-//   then
-//   	ad.setExprience(50);
-//   	System.out.println("Modification created.");
-//   end
+rule "test" salience 23
+   when
+   	c:Customer(username != null)
+   then
+   	System.out.println("Customer username is not null");
+   end
+
 
 //Rules
-rule "Set Beneficiary"
+rule "Set Beneficiary[true]" salience 25
     when
-        c:Customer(username = null)
+        c:Customer(username == null)
     then
         c.setBeneficiary(true);
         System.out.println("Customer is transformed into beneficiary");
- end
+end
 
-rule "Default gender"
+rule "Set Beneficiary[false]" salience 24
     when
-        p:Profile(gender = null)
+        c:Customer(username != null)
+    then
+        c.setBeneficiary(false);
+end
+
+rule "Default gender"  salience 22
+    when
+        p:Profile(gender == null)
     then
         p.setGender(Gender.MALE);
 end
 
-rule "Set male gender from ssc <2000"
+rule "Set male gender from ssc <2000" salience 21
    when
-      p:Profile(ssc matches "^1+")
+      p:Profile(ssc matches "/^1+/gm")
    then
       p.setGender(Gender.MALE);
 end
 
-rule "Set male gender from ssc <2100"
+rule "Set male gender from ssc <2100" salience 20
    when
-      p:Profile(ssc matches "^5+")
+      p:Profile(ssc matches "/^5+/gm")
    then
       p.setGender(Gender.MALE);
 end
 
-rule "Set female gender from ssc <2000"
+rule "Set female gender from ssc <2000" salience 19
    when
-      p:Profile(ssc matches "^2+")
+      p:Profile(ssc matches "/^2+/gm")
    then
       p.setGender(Gender.MALE);
 end
 
-rule "Set female gender from ssc <2100"
+rule "Set female gender from ssc <2100" salience 18
    when
-      p:Profile(ssc matches "^6+")
+      p:Profile(ssc matches "/^6+/gm")
    then
       p.setGender(Gender.MALE);
 end
 
-rule "Set birthday from ssc"
+rule "Set birthday from ssc" salience 17
    when
-      p:Profile(ssc matches "^6+")
+      p:Profile(ssc matches "/^6+/gm")
    then
       p.setGender(Gender.MALE);
 end
 
-rule "Age from birthday" salience 10
+rule "Age from birthday" salience 16
     when
         p:Profile(birthday != null)
     then
         Date curent = new Date();
-        p.setAge(getDiffYears(getBirthday(),curent));
+        p.setAge(getDiffYears(p.getBirthday(),curent));
  end
 
-rule "Country[Romania] from phonenumber"
+rule "Country[Romania] from phonenumber" salience 15
     when
-        p:Profile(phonenumber matches "^0040+")
+        p:Profile(phonenumber matches "/^0040+/gm")
     then
         p.setCountry("Romania");
  end
 
-rule "Country[R.Moldova] from phonenumber"
+rule "Country[R.Moldova] from phonenumber" salience 14
      when
-         p:Profile(phonenumber matches "^00373+")
+         p:Profile(phonenumber matches "/^00373+/gm")
      then
         p.setCountry("R.Moldova");
   end
 
-rule "License cancellation"
+rule "License cancellation" salience 13
      when
          p:Profile(age < 16)
      then
-        p.getCustomer().getAutodata().setLicenseId(null);
+        p.getCustomer().getAutodata().setLicenseId("");
         p.getCustomer().getAutodata().setExprience(0);
         p.getCustomer().getAutodata().setAccidents(0);
+        System.out.println("License cancellation");
   end
 
-rule "Wrong license"
+rule "Wrong license" salience 12
     when
         p:Profile((age <18 && age>=16) && licenseChecker(customer.autodata.category))
     then
-        p.getCustomer().getAutodata().setLicenseId(null);
+        p.getCustomer().getAutodata().setLicenseId("");
         p.getCustomer().getAutodata().setExprience(0);
         p.getCustomer().getAutodata().setAccidents(0);
+        System.out.println("Wrong license");
  end
 
-rule "Experience category[<5 years]"
+rule "Experience category[<5 years]" salience 12
     when
         ad:AutoData(exprience <5)
     then
         ad.setExperienceLevel(ExperienceLevel.NEWBIE);
  end
 
-rule "Experience category[between 5 and 15 years]"
+rule "Experience category[between 5 and 15 years]" salience 11
     when
-        ad:AutoData(exprience > 5 && exprience < 15)
+        ad:AutoData(exprience >= 5 && exprience < 15)
     then
         ad.setExperienceLevel(ExperienceLevel.INTERMEDIATE);
  end
 
-rule "Experience category[>15 years]"
+rule "Experience category[>15 years]" salience 10
     when
         ad:AutoData(exprience > 15)
     then
         ad.setExperienceLevel(ExperienceLevel.EXPERT);
  end
 
-rule "Accident level[Low]"
+rule "Accident level[Low]" salience 9
     when
-        ad:AutoData(accidentsScore(accidents,exprience) <= 0.5)
+        ad:AutoData(accidentsScore(accidents,exprience) < 0.5)
     then
         ad.setAccidentsLevel(AccidentsLevel.LOW);
  end
 
-rule "Accident level[Medium]"
+rule "Accident level[Medium]" salience 8
     when
-        ad:AutoData(accidentsScore(accidents,exprience) > 0.5 && accidentsScore(accidents,exprience) <1)
+        ad:AutoData(accidentsScore(accidents,exprience) >= 0.5 && accidentsScore(accidents,exprience) <1)
     then
         ad.setAccidentsLevel(AccidentsLevel.MEDIUM);
  end
 
-rule "Accident level[High]"
+rule "Accident level[High]" salience 7
     when
-        ad:AutoData(accidentsScore(accidents,exprience) > 1 && accidentsScore(accidents,exprience) <1.5)
+        ad:AutoData(accidentsScore(accidents,exprience) >= 1 && accidentsScore(accidents,exprience) <1.5)
     then
         ad.setAccidentsLevel(AccidentsLevel.HIGH);
  end
 
-rule "Accident level[VeryHigh]"
+rule "Accident level[VeryHigh]" salience 6
     when
-        ad:AutoData(accidentsScore(accidents,exprience) > 1.5 && accidentsScore(accidents,exprience) <2)
+        ad:AutoData(accidentsScore(accidents,exprience) >= 1.5)
     then
         ad.setAccidentsLevel(AccidentsLevel.VERYHIGH);
  end
 
-rule "Health care needs[High]"
+rule "Health care needs[High]" salience 5
     when
         h:HealthData(customer.profile.age >70)
     then
         h.setHealthcareNeeds(HealthCareNeeds.HIGH);
  end
 
-rule "Health care needs[High]"
+ rule "Health care needs[Loe]" salience 4
      when
-         h:HealthData(customer.profile.age >60 && smoker = true)
+         h:HealthData(customer.profile.age <30)
+     then
+         h.setHealthcareNeeds(HealthCareNeeds.LOW);
+  end
+
+rule "Health care needs[Medium{smoker}]" salience 3
+     when
+         h:HealthData(customer.profile.age >40 && smoker == true)
+     then
+         h.setHealthcareNeeds(HealthCareNeeds.MEDIUM);
+  end
+
+rule "Health care needs[High{smoker}]" salience 2
+     when
+         h:HealthData(customer.profile.age >60 && smoker == true)
      then
          h.setHealthcareNeeds(HealthCareNeeds.HIGH);
   end
 
-rule "Purpose default"
+rule "Purpose default" salience 1
     when
-        t:TravelData(pourpose = "")
+        t:TravelData(pourpose == "")
     then
         t.setPourpose(Purpose.REST);
  end

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="ejb-jar" name="insurance-app:ear">
+    <output-path>$PROJECT_DIR$/out/artifacts/insurance_app_ear</output-path>
+    <root id="archive" name="insurance-app_ear.jar">
+      <element id="artifact" artifact-name="insurance-app:ear exploded" />
+    </root>
+  </artifact>
+</component>

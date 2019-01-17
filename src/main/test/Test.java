@@ -24,9 +24,9 @@ public class Test {
 
 		Customer customer = new Customer();
 		Profile profile = new Profile();
-		customer.setEmail("example2@mail.com");
-		customer.setUsername("test4");
-		customer.setPassword("pass");
+		customer.setEmail("example7@mail.com");
+		customer.setUsername("test7");
+        customer.setPassword("pass7");
 		customer.setObservations("Observations");
 		customer.setAutodata(null);
 		customer.setProfile(null);

@@ -1,5 +1,8 @@
 package com.enums;
 
+import javax.faces.bean.ManagedBean;
+
+@ManagedBean
 public enum Gender {
 	MALE("Male"),
 	FEMALE("Female");
@@ -9,4 +12,8 @@ public enum Gender {
 	Gender(String gender) {
         this.gender = gender;
     }
+
+	public String getGender() {
+		return gender;
+	}
 }

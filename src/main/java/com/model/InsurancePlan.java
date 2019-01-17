@@ -19,7 +19,7 @@ public class InsurancePlan {
 	// price for year
 	private Double price;
 	@OneToOne(optional = false,mappedBy = "plan")
-	@JoinColumn(name="policyId", unique=true, nullable=false, updatable=false)
+//	@JoinColumn(name="policyId", unique=true, nullable=false, updatable=false)
 	private InsurancePolicy insurancePolicy;
 	@LazyCollection(LazyCollectionOption.FALSE)
 	@OneToMany(cascade = CascadeType.ALL)

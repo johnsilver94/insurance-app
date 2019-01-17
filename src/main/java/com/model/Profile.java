@@ -17,7 +17,7 @@ import java.util.Date;
 public class Profile {
     @Id
     @GeneratedValue
-    @Column(name = "profileId",unique = true,nullable = false)
+//    @Column(name = "profileId",unique = true,nullable = false)
     private BigInteger id;
     @MapsId
     @OneToOne(fetch = FetchType.LAZY)

@@ -5,7 +5,8 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="InsuranceApplication" transaction-type="JTA">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<jta-data-source>java:/InsuranceDB</jta-data-source>
+		<!--<jta-data-source>java:/InsuranceDB</jta-data-source>-->
+		<jta-data-source>java:/comp/env/jdbc/InsuranceDB</jta-data-source>
 		<class>com.model.AutoData</class>
 		<class>com.model.AutoPolicy</class>
 		<class>com.model.Benefit</class>
@@ -23,14 +24,21 @@
 		<class>com.model.Vehicle</class>
 		<class>com.model.Profile</class>
 		<properties>
-			<!--<property name="hibernate.connection.url" value="jdbc:oracle:thin:@localhost:1521:orcl" />-->
-			<!--<property name="hibernate.connection.driver_class"  value="oracle.jdbc.OracleDriver" />-->
-			<!--<property name="hibernate.connection.username" value="C##john" />-->
-			<!--<property name="hibernate.connection.password" value="john" />-->
-			<!--<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>-->
-			<!--<property name="hibernate.hbm2ddl.auto" value="update" />-->
-			<!--<property name="hibernate.show_sql" value="true" />-->
-			<property name="hibernate.ejb.cfgfile" value="hibernate.cfg.xml"/>
+			<property name="hibernate.connection.url" value="jdbc:oracle:thin:@localhost:1521:orcl" />
+			<property name="hibernate.connection.driver_class"  value="oracle.jdbc.OracleDriver" />
+			<property name="hibernate.connection.username" value="C##john" />
+			<property name="hibernate.connection.password" value="john" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.c3p0.min_size" value="5" />
+			<property name="hibernate.c3p0.max_size" value="20" />
+			<property name="hibernate.c3p0.timeout" value="300" />
+			<!--&lt;!&ndash;<property name="hibernate.ejb.cfgfile" value="hibernate.cfg.xml"/>&ndash;&gt;-->
+			<!--<property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:orcl"/>-->
+			<!--<property name="javax.persistence.jdbc.user" value="C##john"/>-->
+			<!--<property name="javax.persistence.jdbc.password" value="john"/>-->
+			<!--<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver"/>-->
 		</properties>
 	</persistence-unit>
 </persistence>

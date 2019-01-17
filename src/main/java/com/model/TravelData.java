@@ -14,7 +14,7 @@ import java.math.BigInteger;
 public class TravelData {
 	@Id
 	@GeneratedValue
-	@Column(name = "travelId", unique = true,nullable = false)
+//	@Column(name = "travelId", unique = true,nullable = false)
 	private BigInteger id;
 	@MapsId
 	@OneToOne(fetch = FetchType.LAZY)

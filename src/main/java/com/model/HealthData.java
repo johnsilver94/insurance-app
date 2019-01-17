@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class HealthData {
     @Id
     @GeneratedValue
-    @Column(name = "id",unique = true,nullable = false)
+//    @Column(name = "id",unique = true,nullable = false)
     private BigInteger id;
     @MapsId
     @OneToOne(fetch = FetchType.LAZY)
