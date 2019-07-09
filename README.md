@@ -1,103 +1,53 @@
-# Insurance Application
+# InsuranceApplication [Drools Test]
 
 Insurance policies on various domains (agriculture/ health, holidays, cars and individual property)
 
-# Notes
+# Quick setup (using IntelliJ Idea)
 
-1. Customer segmentation: Different customers tend to have specific expectations for the insurance business. Insurance marketing applies various techniques to increase the number of customers and to assure targeted marketing strategies.
-   The algorithms perform customers’ segmentation according to their financial sophistication, age, location, etc. Thus, all the customers are classified into groups by spotting coincidences in their attitude, preferences, behavior, or personal information. This grouping allows developing attitude and solutions especially relevant for the particular customers.
-   [https://medium.com/activewizards-machine-learning-company/top-10-data-science-use-cases-in-insurance-8cade8a13ee1]
+1. Install latest version of JDK.
+2. Download repository(using git or manual)
+4. Open project and Add as a Maven project
+5. Setup SDK
+6. Setup Wildfly server
+7. Setup project persistence
+8. Deploy and run server
+9. Base address is http://localhost:8080/insurance-application
 
-# Entities:
+### Persistence setup
 
-    Customer:
-        Integer id;
-        String name;
-        Date birthday;
-        Enum gender; //Enum(Male,Female)
-        String address;
-        String phonenumber;
-        String email;
-        String observations;
-        List<InsurancePolicy> customerPolicies;
+- Open persistence.xml (src/main/resources/META-INF) and change datasource credentials
 
-    InsurancePolicy: // abstract
-        Integer id;
-        Enum type; //Enum(Health,Auto,Travel)
-        Date starDate;
-        Date endDate;
-        InsurancePlan plan; // selected plan by customer
+```xml
+<properties>
+    <property name="hibernate.connection.url" value="jdbc:oracle:thin:@localhost:1521:[Your SID]" />
+    <property name="hibernate.connection.driver_class"  value="oracle.jdbc.OracleDriver" />
+    <property name="hibernate.connection.username" value="[Your username]" />
+    <property name="hibernate.connection.password" value="[Your password]" />
+    <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
+    <property name="hibernate.hbm2ddl.auto" value="create" />
+    <property name="hibernate.show_sql" value="true" />
+    <property name="hibernate.c3p0.min_size" value="5" />
+    <property name="hibernate.c3p0.max_size" value="20" />
+    <property name="hibernate.c3p0.timeout" value="300" />
+</properties>
+```
 
-    HealthPolicy: // extends InsurancePolicy
-        Enum coverageLevel; //Enum(Gold,Silver,Bronze)
-        List<HealthData> beneficiaries;
+# Design and Development
 
-    AutoPolicy: // extends InsurancePolicy
-        List<AutoData> beneficiaries
-        List<Vehicle> vehicles
+Used technologies:
 
-    TravelPolicy: // extends InsurancePolicy
-        List<Country> destinations;
-        List<TravelData> beneficiaries;
+- Oracle database 18c
+- IntelliJ Idea
+- Maven (dependecy management)
+- Tomcat (Application server)
 
-    HealthData:
-        Customer customer
-        Enum healtcareNeeds; //Enum(Low use,Medium use,High use)
-        Boolean isSmoker;
-        List<Disease> diseases;
-        List<Medication> medications;
+## BD Schema
 
-    AutoData:
-        Integer id;
-        Customer customer;
-        DriverCategory driverCategory;
-        Integer drivingExpYears; // years of driving experience
-        Integer accidentsInvolved; // number of accidents the person was involved in (he was at fault)
-        DriverType driverType;; // Enum(Taxi, PublicTransport, Delivery, ProductTransport, ProfessionalDriver, and Other)
-
-    TravelData: // ! need HealthData
-        Integer id;
-        Customer customer;
-        Enum pourpose; //Enum(Business,Sport,Rest)
-
-    Vehicle:
-        Integer id;
-        String manufacturer;
-        Integer year;
-        String model;
-        VehicleType type; // Enum(Sedan, Coupe, Hatchback, Convertible, SUV, Motorcycle)
-        Double value; // car value, at the moment (?)
-        String observations;
-        Boolean inLeasing;
-        Boolean securitySystem;
-
-
-    InsurancePlan: // !name package is used in Java
-        int id;
-        String name;
-        String description; // what the package offers
-        double price;
-        List<Coverage> coverages;
-        List<Benefit> benefits;
-
-    Disease:
-        Integer id;
-        String name;
-
-    Coverage:
-        Integer id;
-        String name;
-        String description;
-
-    Country:
-        Integer id;
-        String code;
-        String name;
-
-    Benefit:
-        Integer id;
-        String description;
-        Double amount;
-
-# BD Schema
 ![Schema](/_source/schema.jpg)
+
+
+## Notes
+
+Customer segmentation: Different customers tend to have specific expectations for the insurance business. Insurance marketing applies various techniques to increase the number of customers and to assure targeted marketing strategies.
+The algorithms perform customers’ segmentation according to their financial sophistication, age, location, etc. Thus, all the customers are classified into groups by spotting coincidences in their attitude, preferences, behavior, or personal information. This grouping allows developing attitude and solutions especially relevant for the particular customers.
+[Top 10 Data Science Use Cases in Insurance](https://medium.com/activewizards-machine-learning-company/top-10-data-science-use-cases-in-insurance-8cade8a13ee1)
