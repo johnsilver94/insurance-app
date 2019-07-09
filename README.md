@@ -2,102 +2,104 @@
 
 Insurance policies on various domains (agriculture/ health, holidays, cars and individual property)
 
-# Notes
+# Quick setup
 
-1. Customer segmentation: Different customers tend to have specific expectations for the insurance business. Insurance marketing applies various techniques to increase the number of customers and to assure targeted marketing strategies.
-   The algorithms perform customers’ segmentation according to their financial sophistication, age, location, etc. Thus, all the customers are classified into groups by spotting coincidences in their attitude, preferences, behavior, or personal information. This grouping allows developing attitude and solutions especially relevant for the particular customers.
-   [https://medium.com/activewizards-machine-learning-company/top-10-data-science-use-cases-in-insurance-8cade8a13ee1]
+1. Install latest version of JDK.
+2. Install [Wildfy server](https://drive.google.com/file/d/1WcN83VJzVDkrXaaq-0FxGV0k57G6DyZN/view?usp=sharing).
+3. Download repository(using git or manual)
+4. Open project
+5. Setup Wildfly server
+6. Setup project persistence
+7. Deploy and run server
+8. Base address is http://localhost:8080/insurance-application
 
-# Entities:
+### Wildfly server configuration
 
-    Customer:
-        Integer id;
-        String name;
-        Date birthday;
-        Enum gender; //Enum(Male,Female)
-        String address;
-        String phonenumber;
-        String email;
-        String observations;
-        List<InsurancePolicy> customerPolicies;
+!! Wildfly server from the second step have Oracle driver installed, and admin user are setup with credentials:
 
-    InsurancePolicy: // abstract
-        Integer id;
-        Enum type; //Enum(Health,Auto,Travel)
-        Date starDate;
-        Date endDate;
-        InsurancePlan plan; // selected plan by customer
+- username: wildfly
+- password: wildfly
 
-    HealthPolicy: // extends InsurancePolicy
-        Enum coverageLevel; //Enum(Gold,Silver,Bronze)
-        List<HealthData> beneficiaries;
+Now user need just to set Oracle database in Wildfly configuration (Wildlfy\standalone\configuration\standalone.xml)
 
-    AutoPolicy: // extends InsurancePolicy
-        List<AutoData> beneficiaries
-        List<Vehicle> vehicles
+1. Find datasources section in standalone.xml
+2. Change datasource configuration with yours
 
-    TravelPolicy: // extends InsurancePolicy
-        List<Country> destinations;
-        List<TravelData> beneficiaries;
+```xml
+<datasource jndi-name="java:jboss/datasources/[Your datasource name]" pool-name="[Your pool name]" enabled="true" use-java-context="true">
+    <connection-url>jdbc:oracle:thin:@localhost:1521:john</connection-url>
+    <driver>oracle</driver>
+    <pool>
+        <min-pool-size>1</min-pool-size>
+        <max-pool-size>5</max-pool-size>
+        <prefill>true</prefill>
+    </pool>
+    <security>
+        <user-name>[Your username]</user-name>
+        <password>[Your password]</password>
+    </security>
+</datasource>
+```  
 
-    HealthData:
-        Customer customer
-        Enum healtcareNeeds; //Enum(Low use,Medium use,High use)
-        Boolean isSmoker;
-        List<Disease> diseases;
-        List<Medication> medications;
+- Now add Wildfly server as [Run configuration in IntelliJ](https://www.youtube.com/watch?v=ra72h2K9vJY).
 
-    AutoData:
-        Integer id;
-        Customer customer;
-        DriverCategory driverCategory;
-        Integer drivingExpYears; // years of driving experience
-        Integer accidentsInvolved; // number of accidents the person was involved in (he was at fault)
-        DriverType driverType;; // Enum(Taxi, PublicTransport, Delivery, ProductTransport, ProfessionalDriver, and Other)
+### Persistence setup
 
-    TravelData: // ! need HealthData
-        Integer id;
-        Customer customer;
-        Enum pourpose; //Enum(Business,Sport,Rest)
+- Open hibernate.cfg.xml (src/main/resources/hibernate.cfg.xml) and change datasource credentials
 
-    Vehicle:
-        Integer id;
-        String manufacturer;
-        Integer year;
-        String model;
-        VehicleType type; // Enum(Sedan, Coupe, Hatchback, Convertible, SUV, Motorcycle)
-        Double value; // car value, at the moment (?)
-        String observations;
-        Boolean inLeasing;
-        Boolean securitySystem;
+```xml
+ <session-factory>
+  <property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
+  <property name="hibernate.connection.password">[Your password]</property>
+  <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:[Your SID]</property>
+  <property name="hibernate.connection.username">[Your username]</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+  <property name="hibernate.hbm2ddl.auto">create</property>
+  <property name="hibernate.c3p0.timeout">50000</property>
+  <property name="hibernate.show_sql">true</property>
+  <property name="hibernate.cache.provider_class">org.hibernate.jpa.HibernatePersistenceProvider</property>
+.....
+</session-factory>
+```
 
+- Open persistence.xml and change configuration with yours
 
-    InsurancePlan: // !name package is used in Java
-        int id;
-        String name;
-        String description; // what the package offers
-        double price;
-        List<Coverage> coverages;
-        List<Benefit> benefits;
+```xml
+<jta-data-source>java:jboss/datasources/[Your datasource name]</jta-data-source>
+```
 
-    Disease:
-        Integer id;
-        String name;
+# Design and Development
 
-    Coverage:
-        Integer id;
-        String name;
-        String description;
+## Used technologies
 
-    Country:
-        Integer id;
-        String code;
-        String name;
+- Oracle database 18c
+- IntelliJ Idea
+- Maven (dependecy management)
+- Postman (REST client)
 
-    Benefit:
-        Integer id;
-        String description;
-        Double amount;
+## BD Schema
 
-# BD Schema
 ![Schema](/_source/schema.jpg)
+
+## REST
+
+- /resources/customers/auth
+    - used for authentication
+    - parameters keys
+        - username
+        - password
+- /resources/customers/
+    - get customers/users list
+- /resources/customers/{id}
+    - get customer by {id}
+- /resources/customers/register
+    - register/add new customer
+    - parameters keys
+        - username
+        - password
+
+## Notes
+
+Customer segmentation: Different customers tend to have specific expectations for the insurance business. Insurance marketing applies various techniques to increase the number of customers and to assure targeted marketing strategies.
+The algorithms perform customers’ segmentation according to their financial sophistication, age, location, etc. Thus, all the customers are classified into groups by spotting coincidences in their attitude, preferences, behavior, or personal information. This grouping allows developing attitude and solutions especially relevant for the particular customers.
+[Top 10 Data Science Use Cases in Insurance](https://medium.com/activewizards-machine-learning-company/top-10-data-science-use-cases-in-insurance-8cade8a13ee1)

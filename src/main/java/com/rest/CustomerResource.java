@@ -59,7 +59,6 @@ public class CustomerResource{
         query.setParameter("username",username);
         query.setParameter("pass",pass);
 
-
         try
         {
             customer =  (Customer) query.getSingleResult();
@@ -72,7 +71,7 @@ public class CustomerResource{
 //            KieContainer kContainer=kService.getKieClasspathContainer();
 //            KieSession kieSession=kContainer.newKieSession("ksession-rules");
 
-
+            customer = new Customer();
             customer.setPassword(pass);
             customer.setUsername(username);
 

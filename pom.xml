@@ -448,12 +448,7 @@
     	<artifactId>hibernate-core</artifactId>
     	<version>5.3.7.Final</version>
     </dependency>
-    <!-- https://mvnrepository.com/artifact/org.geotools.jdbc/gt-jdbc-oracle -->
-	<dependency>
-	    <groupId>org.geotools.jdbc</groupId>
-	    <artifactId>gt-jdbc-oracle</artifactId>
-	    <version>14.5.p2</version>
-	</dependency>
+
 	<!-- https://mvnrepository.com/artifact/junit/junit -->
 	<dependency>
 	    <groupId>junit</groupId>
@@ -466,7 +461,7 @@
 		<artifactId>ojdbc8</artifactId>
 		<version>18.3.0.0</version>
 		<scope>system</scope>
-		<systemPath>D:/Desktop/EclipseWorkspace/InsuranceApplication/lib/ojdbc8.jar</systemPath>
+		<systemPath>C:/Users/silver_fang/Desktop/Java Tools/Libraries and drivers/ojdbc8.jar</systemPath>
 	</dependency>
     
     <dependency>
@@ -509,19 +504,6 @@
 
   <build>
     <plugins>
-      <!--<plugin>-->
-        <!--<groupId>org.wildfly.swarm</groupId>-->
-        <!--<artifactId>wildfly-swarm-plugin</artifactId>-->
-        <!--<version>${version.wildfly.swarm}</version>-->
-        <!--<executions>-->
-          <!--<execution>-->
-            <!--<phase>package</phase>-->
-            <!--<goals>-->
-              <!--<goal>create</goal>-->
-            <!--</goals>-->
-          <!--</execution>-->
-        <!--</executions>-->
-      <!--</plugin>-->
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -562,28 +544,6 @@
           <warName>insurance-application</warName>
         </configuration>
       </plugin>
-      <!--<plugin>-->
-        <!--<groupId>external.atlassian.jgitflow</groupId>-->
-        <!--<artifactId>jgitflow-maven-plugin</artifactId>-->
-        <!--<version>${version.plugin.jgitflow}</version>-->
-          <!--<configuration>-->
-            <!--<noDeploy>true</noDeploy>-->
-          <!--</configuration>-->
-      <!--</plugin>-->
-      <!--<plugin>-->
-        <!--<groupId>org.zeroturnaround</groupId>-->
-        <!--<artifactId>jrebel-maven-plugin</artifactId>-->
-        <!--<version>${version.plugin.jrebel}</version>-->
-        <!--<executions>-->
-          <!--<execution>-->
-            <!--<id>generate-rebel-xml</id>-->
-            <!--<phase>process-resources</phase>-->
-            <!--<goals>-->
-            <!--<goal>generate</goal>-->
-          	<!--</goals>-->
-          <!--</execution>-->
-        <!--</executions>-->
-      <!--</plugin>-->
       <plugin>
         <groupId>org.wildfly.plugins</groupId>
         <artifactId>wildfly-maven-plugin</artifactId>
@@ -592,65 +552,8 @@
         <version>15.0.0.Final</version>
         <filename>insurance-application.war</filename>
         </configuration>
-        <!--<executions>-->
-          <!--<execution>-->
-            <!--<phase>install</phase>-->
-            <!--<goals>-->
-              <!--<goal>deploy-artifact</goal>-->
-            <!--</goals>-->
-            <!--<configuration>-->
-              <!--<groupId>ojdbc8</groupId>-->
-              <!--<artifactId>ojdbc8</artifactId>-->
-              <!--<name>ojdbc8.jar</name>-->
-            <!--</configuration>-->
-          <!--</execution>-->
-        <!--</executions>-->
       </plugin>
-      <!--<plugin>-->
-        <!--<groupId>org.glassfish.embedded</groupId>-->
-        <!--<artifactId>maven-embedded-glassfish-plugin</artifactId>-->
-        <!--<version>${version.plugin.glassfish}</version>-->
-        <!--<configuration>-->
-        <!--<port>8080</port>-->
-        <!--</configuration>-->
-          <!--<executions>-->
-            <!--<execution>-->
-            <!--<id>deploy</id>-->
-            <!--&lt;!&ndash; Workaround to force the deploy goal to not execute on pre-integrations-tests &ndash;&gt;-->
-              <!--<phase>deploy</phase>-->
-              <!--<goals>-->
-              <!--<goal>deploy</goal>-->
-              <!--</goals>-->
-              <!--<configuration>-->
-                <!--<app>target/insurance-application.war</app>-->
-                <!--<contextRoot>insurance-application</contextRoot>-->
-              <!--</configuration>-->
-            <!--</execution>-->
-          <!--</executions>-->
-      <!--</plugin>-->
-      <!--<plugin>-->
-        <!--<groupId>org.apache.tomee.maven</groupId>-->
-        <!--<artifactId>tomee-maven-plugin</artifactId>-->
-        <!--<version>7.0.1</version>-->
-          <!--<configuration>-->
-            <!--<libs>-->
-            <!--<lib>remove:openjpa-</lib>-->
-            <!--<lib>org.hibernate:hibernate-core:5.2.0.Final</lib>-->
-            <!--<lib>org.hibernate.common:hibernate-commons-annotations:5.0.1.Final</lib>-->
-            <!--<lib>org.jboss.logging:jboss-logging:3.3.0.Final</lib>-->
-            <!--<lib>dom4j:dom4j:1.6.1</lib>-->
-            <!--<lib>org.javassist:javassist:3.18.1-GA</lib>-->
-            <!--<lib>com.fasterxml:classmate:1.1.0</lib>-->
-            <!--<lib>antlr:antlr:2.7.7</lib>-->
-            <!--</libs>-->
-            <!--<systemVariables>-->
-              <!--<javax.persistence.provider>-->
-              <!--org.hibernate.jpa.HibernatePersistenceProvider-->
-              <!--</javax.persistence.provider>-->
-            <!--</systemVariables>-->
-          <!--<warFile>target/insurance-application.war</warFile>-->
-          <!--</configuration>-->
-      <!--</plugin>-->
+
       
     </plugins>
   </build>
