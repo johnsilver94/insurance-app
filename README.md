@@ -1,4 +1,4 @@
-# InsuranceApplication
+# InsuranceApplication [REST service on Wildfly Server]
 
 Insurance policies on various domains (agriculture/ health, holidays, cars and individual property)
 
