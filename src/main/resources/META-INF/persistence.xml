@@ -24,12 +24,12 @@
 		<class>com.model.Vehicle</class>
 		<class>com.model.Profile</class>
 		<properties>
-			<property name="hibernate.connection.url" value="jdbc:oracle:thin:@localhost:1521:orcl" />
+			<property name="hibernate.connection.url" value="jdbc:oracle:thin:@localhost:1521:john" />
 			<property name="hibernate.connection.driver_class"  value="oracle.jdbc.OracleDriver" />
-			<property name="hibernate.connection.username" value="C##john" />
-			<property name="hibernate.connection.password" value="john" />
+			<property name="hibernate.connection.username" value="insuranceapp" />
+			<property name="hibernate.connection.password" value="insuranceapp" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
-			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.c3p0.min_size" value="5" />
 			<property name="hibernate.c3p0.max_size" value="20" />

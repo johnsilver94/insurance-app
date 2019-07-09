@@ -79,13 +79,13 @@
       <version>8.0</version>
       <scope>provided</scope>
   </dependency>
-    
+
   <dependency>
       <groupId>com.oracle</groupId>
       <artifactId>ojdbc8</artifactId>
       <version>18.3.0.0</version>
       <scope>system</scope>
-      <systemPath>C:/Users/silver_fang/eclipse/lib/ojdbc8.jar</systemPath>
+      <systemPath>C:/Users/silver_fang/Desktop/Java Tools/Libraries and drivers/ojdbc8.jar</systemPath>
   </dependency>
     
   <dependency>
