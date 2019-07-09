@@ -2,16 +2,17 @@
 
 Insurance policies on various domains (agriculture/ health, holidays, cars and individual property)
 
-# Quick setup
+# Quick setup (using IntelliJ Idea)
 
 1. Install latest version of JDK.
 2. Install [Wildfy server](https://drive.google.com/file/d/1WcN83VJzVDkrXaaq-0FxGV0k57G6DyZN/view?usp=sharing).
 3. Download repository(using git or manual)
-4. Open project
-5. Setup Wildfly server
-6. Setup project persistence
-7. Deploy and run server
-8. Base address is http://localhost:8080/insurance-application
+4. Open project and Add as a Maven project
+5. Setup SDK
+6. Setup Wildfly server
+7. Setup project persistence
+8. Deploy and run server
+9. Base address is http://localhost:8080/insurance-application
 
 ### Wildfly server configuration
 
