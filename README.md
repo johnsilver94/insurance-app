@@ -75,8 +75,9 @@ Now user need just to set Oracle database in Wildfly configuration (Wildlfy\stan
 
 - Oracle database 18c
 - IntelliJ Idea
-- Maven (dependecy management)
+- Maven (dependency management)
 - Postman (REST client)
+- Wildfly (Application server)
 
 ## BD Schema
 
