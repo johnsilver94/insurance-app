@@ -8,10 +8,8 @@ Insurance policies on various domains (agriculture/ health, holidays, cars and i
 2. Download repository(using git or manual)
 4. Open project and Add as a Maven project
 5. Setup SDK
-6. Setup Wildfly server
 7. Setup project persistence
-8. Deploy and run server
-9. Base address is http://localhost:8080/insurance-application
+8. Run Test
 
 ### Persistence setup
 
